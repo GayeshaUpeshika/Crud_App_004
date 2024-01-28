@@ -9,7 +9,7 @@ function UpdateDepartment(){
 
     const departmentName = useRef("");
     const description = useRef("");
-    const noOfEmployees = useRef("");
+    const noOFEmployees = useRef("");
     const imageUrl = useRef("");
 
     const {id} =useParams();
@@ -19,11 +19,11 @@ function UpdateDepartment(){
 
         axios.get(`https://localhost:7163/Department/${id}`)
         .then((response) =>{
-            console.log(response.data.noOfEmployees); 
-            departmentName.current.value = response.data.departmentName;
-            description.current.value = response.data.description;
-            noOfEmployees.current.value = response.data.noOfEmployees;
-            imageUrl.current.value = response.data.imageUrl;
+            const res = response.data[0];
+            departmentName.current.value = res.departmentName;
+            description.current.value = res.description;
+            noOFEmployees.current.value = res.noOFEmployees;
+            imageUrl.current.value = res.imageUrl;
 
         });
     },[])
@@ -35,7 +35,7 @@ function UpdateDepartment(){
         var payload ={
             departmentName: departmentName.current.value,
             description: description.current.value,
-            noOfEmployees: noOfEmployees.current.value,
+            noOFEmployees: noOFEmployees.current.value,
             imageUrl: imageUrl.current.value,
             id:id
         }
@@ -61,7 +61,7 @@ function UpdateDepartment(){
 
       <Form.Group className="mb-3" controlId="noOFEmployees">
         <Form.Label>NoOFEmployees</Form.Label>
-        <Form.Control type="number" ref={noOfEmployees} />
+        <Form.Control type="number" ref={noOFEmployees} />
        
       </Form.Group>
 

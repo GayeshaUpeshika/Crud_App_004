@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../App.css';
+import calculateAge from "../components/shared/CalculateAge";
 
 function AddEmployee() {
 
-
+   const [age,setAge] = useState(0);
+   
 
     const employeeFirstName = useRef("");
     const employeeLastName = useRef("");
@@ -15,14 +17,24 @@ function AddEmployee() {
     const emailId = useRef("");
     const doj = useRef("");
     const dob = useRef("");
-    const age= useRef("");
     const salary = useRef("");
     const imageUrl = useRef("");
 
     const navigate = useNavigate();
 
-    function addEmployeeHandler(){
+    
+      // Calculate age when Date of Birth changes
+      const handleAge = () => {
+          
+        const calculatedAge =calculateAge(dob);
+          setAge(calculatedAge);
+      };
 
+    
+
+
+    function addEmployeeHandler(){
+        console.log(age);
         var payload ={
             employeeFirstName: employeeFirstName.current.value,
             employeeLastName: employeeLastName.current.value,
@@ -30,10 +42,11 @@ function AddEmployee() {
             emailId: emailId.current.value,
             doj: doj.current.value,
             dob: dob.current.value,
-            age: age.current.value,
+            age: age,
             salary: salary.current.value,
             imageUrl: imageUrl.current.value,
-        }
+        } 
+        console.log(payload);
         axios.post("https://localhost:7163/Employee",payload)
         .then((response) =>{
                navigate("/all-employee");
@@ -78,13 +91,13 @@ function AddEmployee() {
 
       <Form.Group className="mb-3" controlId="dob">
         <Form.Label>DOB</Form.Label>
-        <Form.Control type="date" ref={dob} />
+        <Form.Control type="date" ref={dob} onChange={handleAge} />
        
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="age">
         <Form.Label>Age</Form.Label>
-        <Form.Control type="number" ref={age} />
+        <Form.Control type="text" value={age} readOnly/>
        
       </Form.Group>
 

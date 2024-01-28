@@ -81,7 +81,7 @@ function AllDepartment(){
                <b>Description:</b>{sv.description}
               </Card.Text>
               <Card.Text>
-               <b>NoOFEmployees:</b>{sv.noOfEmployees}
+               <b>NoOFEmployees:</b>{sv.noOFEmployees}
               </Card.Text>
               <Button variant="primary" type="button" onClick={()=>{navigate(`/update-department/${sv.id}`)}}>
         Edit

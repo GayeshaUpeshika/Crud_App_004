@@ -11,7 +11,7 @@ function AddDepartment() {
 
     const departmentName = useRef("");
     const description = useRef("");
-    const noOfEmployees = useRef("");
+    const noOFEmployees = useRef("");
     const imageUrl = useRef("");
 
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ function AddDepartment() {
         var payload ={
             departmentName: departmentName.current.value,
             description: description.current.value,
-            noOfEmployees: noOfEmployees.current.value,
+            noOFEmployees: noOFEmployees.current.value,
             imageUrl: imageUrl.current.value,
         }
         axios.post("https://localhost:7163/Department",payload)
@@ -49,7 +49,7 @@ function AddDepartment() {
 
       <Form.Group className="mb-3" controlId="noOfEmployees">
         <Form.Label>NoOFEmployees</Form.Label>
-        <Form.Control type="text" ref={noOfEmployees} />
+        <Form.Control type="text" ref={noOFEmployees} />
        
       </Form.Group>
 

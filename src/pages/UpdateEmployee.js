@@ -1,38 +1,61 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
-import { useEffect, useRef } from "react";
+import { useEffect,useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import calculateAge from "../components/shared/CalculateAge";
 
 
 function UpdateEmployee(){
+
+    const [age,setAge] = useState(0);
+    const [doj,setDOJ] = useState("");
+    const [dob,setDOB] = useState("");
 
     const employeeFirstName = useRef("");
     const employeeLastName = useRef("");
     const department = useRef("");
     const emailId = useRef("");
-    const doj = useRef("");
-    const dob = useRef("");
-    const age= useRef("");
     const salary = useRef("");
     const imageUrl = useRef("");
 
     const {id} =useParams();
     
 
+    // Calculate age when Date of Birth changes
+    const handleAge = (event) => {
+          console.log(event.target.value);
+          setDOB(event.target.value);
+          const dateOfBirth = new Date(event.target.value);
+          const currentDate = new Date();
+          let calculatedAge = currentDate.getFullYear() - dateOfBirth.getFullYear();
+
+          // Subtract one from the age if the birthday hasn't occurred yet this year
+          if (currentDate < new Date(currentDate.getFullYear(), dateOfBirth.getMonth(), dateOfBirth.getDate())) {
+              calculatedAge--;
+          }
+      
+        setAge(calculatedAge);
+    };
+
+    const handleDOJ =(event) =>{
+             setDOJ(event.target.value);
+    }
+
     useEffect(() =>{
 
         axios.get(`https://localhost:7163/Employee/${id}`)
         .then((response) =>{
-            employeeFirstName.current.value = response.data.employeeFirstName;
-            employeeLastName.current.value = response.data.employeeLastName;
-            department.current.value = response.data.department;
-            emailId.current.value = response.data.emailId;
-            doj.current.value = response.data.doj;
-            dob.current.value = response.data.dob;
-            age.current.value = response.data.age;
-            salary.current.value = response.data.salary;
-            imageUrl.current.value = response.data.imageUrl;
+            const res = response.data[0];
+            employeeFirstName.current.value = res.employeeFirstName;
+            employeeLastName.current.value = res.employeeLastName;
+            department.current.value = res.department;
+            emailId.current.value = res.emailId;
+            setDOJ((res.doj).split("T")[0]);
+            setDOB((res.dob).split("T")[0]);
+            setAge(res.age);
+            salary.current.value = res.salary;
+            imageUrl.current.value = res.imageUrl;
 
         });
     },[])
@@ -46,9 +69,9 @@ function UpdateEmployee(){
             employeeLastName: employeeLastName.current.value,
             department: department.current.value,
             emailId: emailId.current.value,
-            doj: doj.current.value,
-            dob: dob.current.value,
-            age: age.current.value,
+            doj: doj,
+            dob: dob,
+            age: age,
             salary: salary.current.value,
             imageUrl: imageUrl.current.value,
             id:id
@@ -88,20 +111,20 @@ function UpdateEmployee(){
 
       <Form.Group className="mb-3" controlId="doj">
         <Form.Label>DOJ</Form.Label>
-        <Form.Control type="date" ref={doj} />
+        <Form.Control type="date" value={doj} onChange={handleDOJ}/>
        
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="dob">
         <Form.Label>DOB</Form.Label>
-        <Form.Control type="date" ref={dob} />
+        <Form.Control type="date" value={dob} onChange={handleAge} />
        
       </Form.Group>
 
      
       <Form.Group className="mb-3" controlId="age">
         <Form.Label>Age</Form.Label>
-        <Form.Control type="number" ref={age} />
+        <Form.Control type="number" value={age} />
        
       </Form.Group>
 
