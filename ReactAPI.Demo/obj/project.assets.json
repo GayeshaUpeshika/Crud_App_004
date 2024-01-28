@@ -2343,11 +2343,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\youtube\\dotnet\\ReactAPI.Demo\\ReactAPI.Demo.csproj",
+      "projectUniqueName": "F:\\youtube_sample\\dotnet\\ReactAPI.Demo\\ReactAPI.Demo.csproj",
       "projectName": "ReactAPI.Demo",
-      "projectPath": "E:\\youtube\\dotnet\\ReactAPI.Demo\\ReactAPI.Demo.csproj",
+      "projectPath": "F:\\youtube_sample\\dotnet\\ReactAPI.Demo\\ReactAPI.Demo.csproj",
       "packagesPath": "C:\\Users\\B E S T  COMPUTER\\.nuget\\packages\\",
-      "outputPath": "E:\\youtube\\dotnet\\ReactAPI.Demo\\obj\\",
+      "outputPath": "F:\\youtube_sample\\dotnet\\ReactAPI.Demo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

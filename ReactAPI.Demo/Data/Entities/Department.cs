@@ -8,7 +8,7 @@ public class Department
 
     public string? Description{get;set;}
 
-    public int NoOfEmployees{get;set;}
+    public int NoOFEmployees{get;set;}
 
     public string? ImageUrl{get;set;}
 }

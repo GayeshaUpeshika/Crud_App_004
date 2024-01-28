@@ -1,5 +1,8 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ReactAPI.Demo.Data.Entities;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace ReactAPI.Demo.Data;
 
@@ -9,11 +12,18 @@ namespace ReactAPI.Demo.Data;
         
        
 
-       public DbSet<Department> Department{get;set;}
+       
 
        public DbSet<Employee> Employee{get;set;}
+
+         public DbSet<Department> Department{get;set;}
        
 
        
     }
+
+
+
+       
+    
 
